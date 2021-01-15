@@ -45,7 +45,6 @@ int main(int argc, char **argv)
 	cout << "Let's Play! Where should I go?\nGoto: ";
 	getline(cin, location.data);
 	n.setParam("/room", location.data);
-	n.setParam("playflag", 0);
     }
   }
 

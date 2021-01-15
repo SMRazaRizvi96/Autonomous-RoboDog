@@ -354,14 +354,16 @@ class Play(smach.State):
     def execute(self, userdata):
 
         global ball_room, playTimer
-	room = ""
+
 	cv2.destroyAllWindows()
         rospy.loginfo('Executing state PLAY')
 	ball_room = Ball()
 	goal = MoveBaseGoal()
 
 	while(time.clock() - playTimer < 300):
+		room = ""
 		rospy.set_param("playflag", 1)
+		rospy.set_param("nearHuman", 0)
 		goal.target_pose.header.frame_id = "map"
 		goal.target_pose.header.stamp = rospy.Time.now()
 		goal.target_pose.pose.position.x = -5.0
@@ -378,7 +380,6 @@ class Play(smach.State):
 		if (room == "entrance"):
 			if(blue_ball.detected_flag == True):
 				ball_room = blue_ball
-				rospy.set_param("room", "")
 
 			else:
 				rospy.set_param("ballToBeFound", "blue")
@@ -386,35 +387,32 @@ class Play(smach.State):
 		elif (room == "closet"):
 			if(red_ball.detected_flag == True):
 				ball_room = red_ball
-				rospy.set_param("room", "")
+
 			else:
 				rospy.set_param("ballToBeFound", "red")
 				return 'ball not already detected'
 		elif (room == "living room"):
 			if(green_ball.detected_flag == True):
 				ball_room = green_ball
-				rospy.set_param("room", "")
+
 			else:
 				rospy.set_param("ballToBeFound", "green")
 				return 'ball not already detected'
 		elif (room == "kitchen"):
 			if(yellow_ball.detected_flag == True):
 				ball_room = yellow_ball
-				rospy.set_param("room", "")
 			else:
 				rospy.set_param("ballToBeFound", "yellow")
 				return 'ball not already detected'
 		elif (room == "bathroom"):
 			if(magenta_ball.detected_flag == True):
 				ball_room = magenta_ball
-				rospy.set_param("room", "")
 			else:
 				rospy.set_param("ballToBeFound", "magenta")
 				return 'ball not already detected'
 		elif (room == "bedroom"):
 			if(black_ball.detected_flag == True):
 				ball_room = black_ball
-				rospy.set_param("room", "")
 			else:
 				rospy.set_param("ballToBeFound", "black")
 				return 'ball not already detected'
@@ -429,7 +427,7 @@ class Play(smach.State):
 		result = movebase_client(goal)
 		if result:
 			print ('I have reached ', room)	
-		rospy.set_param("playflag", 0)
+		rospy.set_param("playflag", 1)
 	rospy.set_param("playflag", 0)
 	return 'after finishing play time'
 
