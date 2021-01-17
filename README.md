@@ -79,12 +79,15 @@ Speak_node.cpp: This is the node provides a GUI to the user to give the ‘play�
 #####   Subscribed to:
 
 '/odom' : Topic to get the Robot's odometry data
+
 '/camera1/image_raw/compressed' : To get the Compressed RGB Camera Image
+
 ‘/scan’: To get the 180 degree laser scan data   
        
 #####   Publishing to:
 
 '/cmd_vel' : To publish velocity command to the Robot
+
 '/move_base/cancel' : To cancel the goal given to the move_base server
 
 **************************    
@@ -194,8 +197,8 @@ This function serves as a move_base client. It publishes a goal to the move_base
 
 #### Authors:
 
-Laiba Zahid (S4853477): S4853477@STUDENTI.UNIGE.IT
-
 Syed Muhammad Raza Rizvi (S4853521): S4853521@STUDENTI.UNIGE.IT
+
+Laiba Zahid (S4853477): S4853477@STUDENTI.UNIGE.IT
 
 The algorithm was drafted and finalized after a discussion between the authors and was then implemented together.
