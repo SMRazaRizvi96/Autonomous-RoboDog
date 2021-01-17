@@ -31,9 +31,14 @@ This is the 'Assignment 3 for the course 'Experimental Robotics' at The Universi
 #### List of Packages:
 
 ‘exp_assignment3’: This is the package developed for the entire state machine of this robot.
+
 ‘planning’: This is a helping package used for the planning aspect.
+
 ‘slam_gmapping’: This is a helping package used for the SLAM purposes.
-‘m-explore’: This the explore-lite package that is a helping package used for the autonomous navigation and exploration, and this packages uses the ‘planning’ and ‘slam_gmapping’ packages.
+
+‘m-explore’: This the explore-lite package that is a helping package used for the autonomous navigation and exploration, and this packages uses the ‘planning’ and 
+
+‘slam_gmapping’ packages.
 
 Now this README file will focus on defining the ‘exp_assignment3’ package developed specifically for this assignment. 
 
@@ -60,6 +65,7 @@ It is a normal colorless human being sitting on a chair.
 #### Files List:
 
 assignment3.py: This is the State Machine
+
 Speak_node.cpp: This is the node provides a GUI to the user to give the ‘play’ command, and to tell the GoTo location to the Robot.
 
 **************************    
@@ -67,9 +73,13 @@ Speak_node.cpp: This is the node provides a GUI to the user to give the ‘play�
 #### ROS Parameters Used in the State Machine:
 
 'expLiteflag': This parameter is a flag that is 1 if the explore-lite package is running, and 0 otherwise.
+
 'playflag': This parameter is a flag that is 1 if the ‘play’ command is given by the user, and 0 otherwise.
+
 ‘nearHuman’: This parameter is a flag that is swtcked to 1 as soon as the robot reaches near the Human for receiving the GoTo location, while in the PLAY state.
+
 ‘room’: This parameter is used to save the GoTo location given by the user.
+
 ‘ballToBeFound’: This parameter saves the ball corresponding to the desired GoTo location.
 
 **************************    
