@@ -117,6 +117,8 @@ In this Assignment, we have developed a Finite State Machine for a Mobile Robot 
 3. PLAY
 4. FIND
 
+![alt text](https://github.com/SMRazaRizvi96/ExpRobotics-FinalAssignment/blob/master/Finite_State_Machine.png)
+
 ##### 1. NORMAL:
 
 In this state, the robot moves on random locations for 4 minutes.
