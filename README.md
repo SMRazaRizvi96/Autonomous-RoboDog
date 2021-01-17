@@ -185,7 +185,7 @@ This function uses Open CV to process the image received, and detects the contou
 If any contour is found, it passes the radius and center of the detected contour, and also the detected ball object to the function track().
 
 
-##### track(adius, center, detected_bal):
+##### track(radius, center, detected_bal):
 This function is responsible to move the robot towards the ball detected, and record the ball’s coordinate.
 At first this functions cancels the goal published on the move_base server and shuts down the explore-lite package. After doing so, this function implements a control to move the robot towards the detected ball until the robot is sufficiently close to the ball. For this, the radius of the detected ball is checked and when it becomes greater than 90, the robot stops, and saves its own odometry coordinate as the coordinate of the ball, and hence of the corresponding room. The explore-lite package is started again once the coordinate is saved.
 During this movement, the robot also has to avoid the obstacles so this functions checks the front_right and front_left regions laser scan values. If the minimum value in any of the two above mentioned regions becomes less than 0.5, the obstacle is assumed to be very near and the function stops the liear motion of the robot and rotates the robot in the opposite direction of the obstacle to avoid the obstacle. Once the minimum value in both the regions becomes greater than 0.5, the function continues to move the robot towards the detected ball.
