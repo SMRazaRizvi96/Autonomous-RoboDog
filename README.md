@@ -146,3 +146,56 @@ The robot switches back to the PLAY state if the corresponding ball is detected,
 **************************
 
 #### Functions Used in the State Machine:
+
+##### robotPos():
+This function is a callback for the robot's odometry topic "/odom".
+This function extracts the x and y coordinate of the Robot, and saves them in the global robot_x and robot_y variables.
+
+
+##### clbk_laser():
+This function is a callback for the laser scan topic "/scan".
+This function divides the 720 samples of the entire 180 degrees into two regions, ‘front_right’, and ‘front_left’, and calculates the minimum values of the laser scan, inside both the regions. These values are later on used for obstacle detection and avoidance.
+
+'front_right': min(min(msg.ranges[180:360]), 10)
+'front_left': min(min(msg.ranges[361:540]), 10)
+
+![alt text](https://github.com/SMRazaRizvi96/ExpRobotics-FinalAssignment/blob/master/laserscan.png)
+
+
+##### imageCallback(image)
+This function is a callback of the compressed rgb image topic ‘/camera1/image_raw/compressed’.
+This function converts the image into CV2 format, and saves it into a global variable.
+
+
+##### detectBall():
+This function uses Open CV to process the image received, and detects the contours of different colored balls in the image using different masks for each color. 
+If any contour is found, it passes the radius and center of the detected contour, and also the detected ball object to the function track().
+
+
+##### track(adius, center, detected_bal):
+This function is responsible to move the robot towards the ball detected, and record the ball’s coordinate.
+At first this functions cancels the goal published on the move_base server and shuts down the explore-lite package. After doing so, this function implements a control to move the robot towards the detected ball until the robot is sufficiently close to the ball. For this, the radius of the detected ball is checked and when it becomes greater than 90, the robot stops, and saves its own odometry coordinate as the coordinate of the ball, and hence of the corresponding room. The explore-lite package is started again once the coordinate is saved.
+During this movement, the robot also has to avoid the obstacles so this functions checks the front_right and front_left regions laser scan values. If the minimum value in any of the two above mentioned regions becomes less than 0.5, the obstacle is assumed to be very near and the function stops the liear motion of the robot and rotates the robot in the opposite direction of the obstacle to avoid the obstacle. Once the minimum value in both the regions becomes greater than 0.5, the function continues to move the robot towards the detected ball.
+
+
+##### movebase_client(goal):
+This function serves as a move_base client. It publishes a goal to the move_base server and wait until the target has been reached.
+
+**************************
+
+#### Limitations:
+	
+1. Since the System is not using any voice commands, one of the limitations is to type the command rather than saying it.
+2. Currently the robot could only move  only in 2D.
+3. The Robot can only detect  specific balls only.
+4. Once the entire environment is explored, the robot will not move in the NORMAL state.
+
+**************************
+
+#### Authors:
+
+Laiba Zahid (S4853477): S4853477@STUDENTI.UNIGE.IT
+
+Syed Muhammad Raza Rizvi (S4853521): S4853521@STUDENTI.UNIGE.IT
+
+The algorithm was drafted and finalized after a discussion between the authors and was then implemented together.
