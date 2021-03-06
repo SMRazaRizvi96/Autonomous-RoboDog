@@ -1,4 +1,4 @@
-# ExpRobotics-Final Assignment
+# Autonomous RoboDog
 
 This is a finite state machine for a Mobile Robot being used inside a house.
 The main idea of this project is to able a mobile robot to move around the environment, explore and map the environment, listen and perform actions to specific commands given by the user, and register the locations of different rooms with the help of different colored balls.
